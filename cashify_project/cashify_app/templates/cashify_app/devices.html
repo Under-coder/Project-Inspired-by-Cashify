@@ -1,0 +1,29 @@
+{% extends "cashify_app/base.html" %}
+{% block title %}Device List - Cashify{% endblock %}
+{% block content %}
+  <h2>Available Devices</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Brand</th>
+        <th>Name</th>
+        <th>Condition</th>
+        <th>Price</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for device in devices %}
+      <tr>
+        <td>{{ device.brand }}</td>
+        <td>{{ device.name }}</td>
+        <td>{{ device.condition }}</td>
+        <td>Rs.{{ device.price }}</td>
+        <td>
+          <a href="{% url 'device_detail' device.pk %}" class="button-link">Details</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

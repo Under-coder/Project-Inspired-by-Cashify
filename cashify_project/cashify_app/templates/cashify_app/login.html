@@ -1,0 +1,13 @@
+{% extends "cashify_app/base.html" %}
+{% block title %}Device List - Cashify{% endblock %}
+{% block content %}
+
+    <h1>Login</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="{% url 'register' %}" class="button-link">Register here</a></p>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "cashify_app/base.html" %}
+{% load static %}
+{% block title %}Home - Cashify{% endblock %}
+{% block content %}
+
+<div class="welcome-section">
+  <!-- <img src="{% static 'cashify_app/images/image1.jpg' %}" alt="Image 1" style="height:70%; width: 70%;"> -->
+  </div>
+<div class="carousel">
+  <button class="carousel-btn left">&#8249;</button>
+  <div class="carousel-track-container">
+    <ul class="carousel-track">
+      <li class="carousel-slide"><img src="{% static 'cashify_app/images/image1.jpg' %}" alt="Image 1"></li>
+      <li class="carousel-slide"><img src="{% static 'cashify_app/images/image2.jpg' %}" alt="Image 2"></li>
+      <li class="carousel-slide"><img src="{% static 'cashify_app/images/image3.jpg' %}" alt="Image 3"></li>
+      <!-- add more slides as needed -->
+    </ul>
+  </div>
+  <button class="carousel-btn right">&#8250;</button>
+</div>
+  <h1>Welcome to Cashify!</h1>
+  <p style="text-align: center;">
+      <a href="{% url 'device_list' %}" class="button-link">Browse Devices</a>
+      <a href="{% url 'device_create' %}" class="button-link">Sell Device</a>
+      <a href="{% url 'transaction_list' %}" class="button-link">Your Transactions</a>
+  </p>
+</div>
+
+
+{% endblock %}

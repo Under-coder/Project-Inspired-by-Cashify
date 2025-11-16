@@ -1,0 +1,10 @@
+{% extends "cashify_app/base.html" %}
+{% block title %}Device List - Cashify{% endblock %}
+{% block content %}
+
+    <h2>Transaction Initiated!</h2>
+    <p>You purchased <strong>{{ transaction.device.brand }} {{ transaction.device.name }}</strong>.</p>
+    <p>Status: {{ transaction.status }}</p>
+    <a href="{% url 'device_list' %}" class="button-link">Back to device list</a>
+
+{% endblock %}

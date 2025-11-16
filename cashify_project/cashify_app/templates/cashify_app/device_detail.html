@@ -1,0 +1,27 @@
+{% extends "cashify_app/base.html" %}
+{% block title %}Device List - Cashify{% endblock %}
+{% block content %}
+    <h2>{{ device.brand }} {{ device.name }}</h2>
+    <!-- <img src="{{ Device.image.url }}" alt="img"> -->
+    <ul>
+         <li><strong>Device:</strong> {{ device}}</li>
+        <li><strong>Owner:</strong> {{ device.owner.username }}</li>
+        <li><strong>Condition:</strong> {{ device.condition }}</li>
+        <li><strong>Price:</strong> ₹{{ device.price }}</li>
+        <li><strong>Description:</strong> {{ device.description }}</li>
+    </ul>
+    <a href="{% url 'device_update' device.pk %}" class="button-link">Edit</a> |
+    <a href="{% url 'device_delete' device.pk %}" class="button-link">Delete</a>
+    <br>
+    <a href="{% url 'device_list' %}" class="button-link">Back to list</a>
+
+    {% if request.user != device.owner %}
+    <form method="post" action="{% url 'create_transaction' device.pk %}">
+        {% csrf_token %}
+        <button type="submit">Buy Now</button>
+    </form>
+    {% endif %}
+
+{% endblock %}
+
+

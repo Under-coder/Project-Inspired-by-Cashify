@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Cashify{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+   <nav class="navbar">
+  <div class="navbar-left">
+    <a href="{% url 'home' %}" class="navbar-brand">Cashify</a>
+  </div>
+  <div class="navbar-right">
+    <a href="{% url 'device_list' %}">Devices</a>
+    <a href="{% url 'device_create' %}">Sell Device</a>
+    <a href="{% url 'transaction_list' %}">Transactions</a>
+    {% if user.is_authenticated %}
+      <a href="#" id="logout-link">Logout</a>
+    {% else %}
+      <a href="{% url 'login' %}">Login</a>
+      <a href="{% url 'register' %}">Register</a>
+    {% endif %}
+  </div>
+</nav>
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer class="footer">
+  <div>
+    &copy; {{ year|default:"2025" }} Cashify &mdash; Made for demo purposes
+  </div>
+</footer>
+
+<script>
+  document.getElementById('logout-link').addEventListener('click', function(e) {
+    e.preventDefault();
+
+    fetch("{% url 'logout' %}", {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}',  // ensure CSRF token is available in context
+        'Content-Type': 'application/json',
+      },
+      body: '',
+    }).then(response => {
+        if(response.ok){
+            window.location.href = '/';  // redirect after logout
+        }
+    });
+  });
+
+const track = document.querySelector('.carousel-track');
+const slides = Array.from(track.children);
+const nextButton = document.querySelector('.carousel-btn.right');
+const prevButton = document.querySelector('.carousel-btn.left');
+let currentSlide = 0;
+
+function moveToSlide(index) {
+  const slideWidth = slides[0].getBoundingClientRect().width;
+  track.style.transform = 'translateX(-' + (slideWidth * index) + 'px)';
+  currentSlide = index;
+}
+
+nextButton.addEventListener('click', () => {
+  let nextIndex = (currentSlide + 1) % slides.length;
+  moveToSlide(nextIndex);
+});
+
+prevButton.addEventListener('click', () => {
+  let prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+  moveToSlide(prevIndex);
+});
+
+// Optional: initialize position on page load
+moveToSlide(0);
+
+// Optional: auto slide
+setInterval(() => {
+  let nextIndex = (currentSlide + 1) % slides.length;
+  moveToSlide(nextIndex);
+}, 3000);
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+{% extends "cashify_app/base.html" %}
+{% block title %}Device List - Cashify{% endblock %}
+{% block content %}
+
+    <h1>Your Transactions</h1>
+    <table border="1">
+        <tr>
+            <th>Device</th>
+            <th>Buyer</th>
+            <th>Seller</th>
+            <th>Status</th>
+            <th>Date</th>
+        </tr>
+        {% for t in transactions %}
+        <tr>
+            <td>{{ t.device }}</td>
+            <td>{{ t.buyer.username }}</td>
+            <td>{{ t.seller.username }}</td>
+            <td>{{ t.status }}</td>
+            <td>{{ t.transaction_date }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5">No transactions found.</td></tr>
+        {% endfor %}
+    </table>
+
+
+{% endblock %}

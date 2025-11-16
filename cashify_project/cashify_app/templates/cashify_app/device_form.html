@@ -1,0 +1,12 @@
+{% extends "cashify_app/base.html" %}
+{% block title %}Device List - Cashify{% endblock %}
+{% block content %}
+
+    <h2>{% if edit_mode %}Edit Device{% else %}Add New Device{% endif %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Device</button>
+    </form>
+
+    {% endblock %}
